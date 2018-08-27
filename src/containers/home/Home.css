@@ -1,0 +1,48 @@
+.container{
+  display: flex;
+  height: 100vh;
+  padding: 10px;
+}
+
+.matrix {
+  display: grid;
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: thin solid #333;
+}
+
+.value{
+  position: relative;
+  padding-top: 100%;
+  border: thin solid #333;
+  font-size: 100px;
+}
+
+.value::before{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+
+.player1::before{
+  content: 'X';
+}
+
+.player2::before{
+  content: 'O ';
+}
+
+@media (min-width: 480px) {
+  .value{
+    font-size: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  .value{
+    font-size: 200px;
+  }
+}
