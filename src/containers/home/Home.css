@@ -1,48 +1,79 @@
-.container{
+.container {
   display: flex;
   height: 100vh;
-  padding: 10px;
-}
+  padding: 10px; }
+
+.content {
+  position: relative;
+  width: 100%;
+  max-width: 602px;
+  margin: auto; }
 
 .matrix {
   display: grid;
   margin: auto;
   width: 100%;
-  max-width: 600px;
   grid-template-columns: 1fr 1fr 1fr;
-  border: thin solid #333;
-}
+  border: thin solid #333; }
 
-.value{
+.value {
   position: relative;
   padding-top: 100%;
   border: thin solid #333;
-  font-size: 100px;
-}
+  font-size: 100px; }
+  .value::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #333;
+    transform: translate(-50%, -50%); }
+  @media (min-width: 480px) {
+    .value {
+      font-size: 150px; } }
+  @media (min-width: 768px) {
+    .value {
+      font-size: 200px; } }
 
-.value::before{
+.player1::before {
+  content: 'X'; }
+
+.player2::before {
+  content: 'O '; }
+
+.winner-line {
   position: absolute;
-  top: 50%;
+  display: none;
   left: 50%;
-  transform: translate(-50%, -40%);
-}
-
-.player1::before{
-  content: 'X';
-}
-
-.player2::before{
-  content: 'O ';
-}
-
-@media (min-width: 480px) {
-  .value{
-    font-size: 150px;
-  }
-}
-
-@media (min-width: 768px) {
-  .value{
-    font-size: 200px;
-  }
-}
+  width: 94%;
+  height: 10px;
+  transform: translateX(-50%);
+  background: red;
+  z-index: 1; }
+  .winner-line.reverse {
+    display: block;
+    transform: translateX(-50%) rotate(90deg);
+    transform-origin: left;
+    top: 3%; }
+    .winner-line.reverse.index0 {
+      left: 64%; }
+    .winner-line.reverse.index1 {
+      left: 97%; }
+    .winner-line.reverse.index2 {
+      left: 130%; }
+  .winner-line.diagonal {
+    display: block;
+    top: 7%;
+    width: 120%;
+    transform-origin: left; }
+    .winner-line.diagonal.index0 {
+      transform: translateX(-35%) rotate(45deg); }
+    .winner-line.diagonal.index1 {
+      transform: translateX(35%) rotate(135deg); }
+  .winner-line.normal {
+    display: block; }
+    .winner-line.normal.index0 {
+      top: 17%; }
+    .winner-line.normal.index1 {
+      top: 50%; }
+    .winner-line.normal.index2 {
+      top: 82%; }

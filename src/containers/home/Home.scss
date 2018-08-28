@@ -1,48 +1,101 @@
-.container{
+$black: #333;
+$red: red;
+
+.container {
   display: flex;
   height: 100vh;
   padding: 10px;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  max-width: 602px;
+  margin: auto;
 }
 
 .matrix {
   display: grid;
   margin: auto;
   width: 100%;
-  max-width: 600px;
   grid-template-columns: 1fr 1fr 1fr;
-  border: thin solid #333;
+  border: thin solid $black;
 }
 
-.value{
+.value {
   position: relative;
   padding-top: 100%;
-  border: thin solid #333;
+  border: thin solid $black;
   font-size: 100px;
-}
-
-.value::before{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-}
-
-.player1::before{
-  content: 'X';
-}
-
-.player2::before{
-  content: 'O ';
-}
-
-@media (min-width: 480px) {
-  .value{
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: $black;
+    transform: translate(-50%, -50%);
+  }
+  @media (min-width: 480px) {
     font-size: 150px;
+  }
+  @media (min-width: 768px) {
+    font-size: 200px;
   }
 }
 
-@media (min-width: 768px) {
-  .value{
-    font-size: 200px;
+.player1::before {
+  content: 'X';
+}
+
+.player2::before {
+  content: 'O ';
+}
+
+.winner-line {
+  position: absolute;
+  display: none;
+  left: 50%;
+  width: 94%;
+  height: 10px;
+  transform: translateX(-50%);
+  background: $red;
+  z-index: 1;
+  &.reverse{
+    display: block;
+    transform: translateX(-50%) rotate(90deg);
+    transform-origin: left;
+    top: 3%;
+    &.index0{
+      left: 64%;
+    }
+    &.index1{
+      left: 97%;
+    }
+    &.index2{
+      left: 130%;
+    }
+  }
+  &.diagonal{
+    display: block;
+    top: 7%;
+    width: 120%;
+    transform-origin: left;
+    &.index0{
+      transform: translateX(-35%) rotate(45deg);
+    }
+    &.index1{
+      transform: translateX(35%) rotate(135deg);
+    }
+  }
+  &.normal{
+    display: block;
+    &.index0{
+      top: 17%;
+    }
+    &.index1{
+      top: 50%;
+    }
+    &.index2{
+      top: 82%;
+    }
   }
 }
