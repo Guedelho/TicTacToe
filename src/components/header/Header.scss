@@ -1,9 +1,29 @@
+$black: #343a40;
+$green: #28a745;
+$blue: #007bff;
+$red: #dc3545;
+
 .Header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: auto;
+  &.blue {
+    h1{
+      color: $blue;
+    }
+  }
+  &.green {
+    h1{
+      color: $green;
+    }
+  }
+  &.white {
+    h1{
+      color: #fff;
+    }
+  }
 }
 
 h1 {

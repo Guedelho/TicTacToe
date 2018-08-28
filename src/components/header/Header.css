@@ -4,6 +4,12 @@
   left: 0;
   right: 0;
   height: auto; }
+  .Header.blue h1 {
+    color: #007bff; }
+  .Header.green h1 {
+    color: #28a745; }
+  .Header.white h1 {
+    color: #fff; }
 
 h1 {
   text-align: center; }

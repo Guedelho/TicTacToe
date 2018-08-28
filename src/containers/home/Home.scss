@@ -1,17 +1,91 @@
-$black: #333;
-$red: red;
+$black: #343a40;
+$green: #28a745;
+$blue: #007bff;
+$red: #dc3545;
+
+%transition {
+  transition: all 0.6s cubic-bezier(0.572, 0, 0.397, 1) 0s;
+}
+
+.Home {
+  @extend %transition;
+  &.blue {
+    &.winner{
+      background: $blue;
+    }
+    .matrix,
+    .value {
+      border-color: $blue;
+    }
+  }
+  &.green {
+    &.winner{
+      background: $green;
+    }
+    .matrix,
+    .value {
+      border-color: $green;
+    }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  background:#fff;
+  &:first-child{
+    z-index: 10;
+  }
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    border: thin solid $black;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+  }
+  input {
+    display: block;
+    margin: 10px auto;
+    font-size: 16px;
+    border: thin solid $black;
+    border-radius: 10px;
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    background: $black;
+    border: 0;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 15px;
+  }
+}
 
 .container {
   display: flex;
+  flex-wrap: wrap;
   height: 100vh;
   padding: 10px;
-}
-
-.content {
-  position: relative;
-  width: 100%;
-  max-width: 602px;
-  margin: auto;
+  align-items: flex-end;
+  .content {
+    position: relative;
+    width: 100%;
+    max-width: 452px;
+    margin: auto;
+    background: #fff;
+    @extend %transition;
+  }
 }
 
 .matrix {
@@ -35,19 +109,21 @@ $red: red;
     transform: translate(-50%, -50%);
   }
   @media (min-width: 480px) {
-    font-size: 150px;
+    font-size: 130px;
   }
   @media (min-width: 768px) {
-    font-size: 200px;
+    font-size: 160px;
   }
 }
 
 .player1::before {
   content: 'X';
+  color: $blue;
 }
 
 .player2::before {
-  content: 'O ';
+  content: 'O';
+  color: $green;
 }
 
 .winner-line {
@@ -97,5 +173,53 @@ $red: red;
     &.index2{
       top: 82%;
     }
+  }
+}
+
+.data-players {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  flex-wrap: wrap;
+  > div {
+    margin: 10px auto;
+    width: 50%;
+    @media (min-width: 480px) {
+      width: 33.3333333%;
+    }
+  }
+  .game-count{
+    order: 1;
+    @media (min-width: 480px) {
+      order: 0;
+    }
+  }
+}
+
+.restart {
+  width: 100%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.warning {
+  animation: warning-animation .2s ease-out;
+}
+
+@keyframes warning-animation {
+  0%{
+    transform: translateX(0);
+  }
+  25%{
+    transform: translateX(-10%);
+  }
+  50%{
+    transform: translateX(0%);
+  }
+  75%{
+    transform: translateX(10%);
+  }
+  100%{
+    transform: translateX(0);
   }
 }
