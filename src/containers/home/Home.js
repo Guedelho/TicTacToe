@@ -145,7 +145,7 @@ class Home extends Component {
 
   reverseMatrix = (matrix) => matrix.map((line, i) => line.map((value, j) => matrix[j][i]));
 
-  isFull = (matrix) => matrix.map(line => line.every(value => value !== 0)).every(value => value === true);
+  isFull = (matrix) => matrix.map(line => line.every(value => value !== 0)).every(value => value);
 
   render() {
     const {
