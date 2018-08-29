@@ -13,26 +13,25 @@ import {
   updateGameCount,
   updateMatrix
 } from "../../modules/tictactoe";
+import Modal from "../../components/modal/Moda";
 
 class Home extends Component {
   constructor(){
     super();
 
     this.state = {
+      movesCount: 0,
       degCount: 0,
       result: 0,
       winnerPlayer: ''
     }
   }
 
-  onSubmitPlayerName = (e) => {
-    e.preventDefault();
-    e.target.parentElement.classList.add("hide");
-  };
-
   onClickBlock = (e, i, j) => {
-    if (!this.props.matrix[i][j]) {
-      let matrix = this.props.matrix;
+    let matrix = this.props.matrix;
+
+    if (!matrix[i][j] && !this.state.result) {
+      let movesCount = this.state.movesCount;
       let playerTurn = this.props.playerTurn;
 
       this.controlMatrixAnimation(e, playerTurn);
@@ -40,10 +39,14 @@ class Home extends Component {
       matrix[i][j] = playerTurn;
       this.props.updateMatrix(matrix);
 
+      movesCount++;
+      this.setState({movesCount});
+
       if(this.gameController(matrix)) return;
 
       playerTurn = playerTurn === 1 ? 2 : 1;
       this.props.updatePlayerTurn(playerTurn);
+
     } else if(!this.state.result){
       let matrix = document.querySelector(".matrix");
 
@@ -59,63 +62,70 @@ class Home extends Component {
     let result = this.verifyLine(matrix, false, false) || this.verifyLine(this.reverseMatrix(matrix), true, false) || this.verifyLine(this.diagonalMatrix(matrix), false, true);
 
     if (result) {
-      let winnerLine = document.querySelector(".winner-line");
-      let home = document.querySelector(".Home");
-
-      if (result.winner === 1) {
-        let playerVictory1 = this.props.playerVictory1;
-        playerVictory1++;
-        this.props.updatePlayerVictory("player1", playerVictory1);
-      } else {
-        let playerVictory2 = this.props.playerVictory2;
-        playerVictory2++;
-        this.props.updatePlayerVictory("player2", playerVictory2);
-      }
-
-      if (result.isReverse) {
-        winnerLine.classList.add("reverse");
-      } else if (result.isDiagonal) {
-        winnerLine.classList.add("diagonal");
-      } else {
-        winnerLine.classList.add("normal");
-      }
-      winnerLine.classList.add("index" + result.lineIndex);
-      home.classList.add("winner");
-      this.setState({result: 1});
-    } else if (this.isFull(matrix)) {
+      this.handlerWinner(result);
+    } else if (this.state.movesCount === 8) {
       this.setState({result: 2});
     }
 
-    if(result || this.isFull(matrix)){
-      let gameCount = this.props.gameCount;
-      gameCount++;
-      this.props.updateGameCount(gameCount);
-      this.props.updateMatrix(null);
+    if(result || this.state.movesCount === 8){
+      this.handleEndGame();
       return true;
     }
     return false;
   };
 
-  controlMatrixAnimation = (e, playerTurn) => {
-    let degCount = this.state.degCount;
-    let content = document.querySelector(".container .content");
+  handlerWinner = (result) => {
+    let winnerLine = document.querySelector(".winner-line");
+    let home = document.querySelector(".Home");
 
-    this.setState({degCount: degCount + 90}, () => {
-      content.style.transform = `rotate(${this.state.degCount}deg)`;
-    });
-    e.target.classList.add("player" + playerTurn);
+    if (result.winner === 1) {
+      let playerVictory1 = this.props.playerVictory1;
+      playerVictory1++;
+      this.props.updatePlayerVictory("player1", playerVictory1);
+    } else {
+      let playerVictory2 = this.props.playerVictory2;
+      playerVictory2++;
+      this.props.updatePlayerVictory("player2", playerVictory2);
+    }
+
+    if (result.isReverse) {
+      winnerLine.classList.add("reverse");
+    } else if (result.isDiagonal) {
+      winnerLine.classList.add("diagonal");
+    } else {
+      winnerLine.classList.add("normal");
+    }
+
+    winnerLine.classList.add("index" + result.lineIndex);
+    home.classList.add("winner");
+    this.setState({result: 1});
   };
 
-  resetGameInterface = () => {
+  handleEndGame = () => {
+    let gameCount = this.props.gameCount;
+    gameCount++;
+    this.props.updateGameCount(gameCount);
+    this.props.updateMatrix(null);
+  };
+
+  controlMatrixAnimation = (e, playerTurn) => {
+    let degCount = this.state.degCount;
+
+    e.target.classList.add("type" + playerTurn);
+
+    this.setState({degCount: degCount + 90});
+  };
+
+  resetGameInterface = (playerColor) => {
     let winnerLine = document.querySelector(".winner-line");
     let home = document.querySelector(".Home");
     let value = [...document.querySelectorAll(".value")];
 
     winnerLine.className = "winner-line";
-    home.className = "Home";
+    home.className = "Home " + playerColor;
     value.map(element => element.className = "value");
 
-    this.setState({result: 0});
+    this.setState({result: 0, movesCount: 0, degCount: 0});
   };
 
   verifyLine = (matrix, isReverse, isDiagonal) => {
@@ -145,8 +155,6 @@ class Home extends Component {
 
   reverseMatrix = (matrix) => matrix.map((line, i) => line.map((value, j) => matrix[j][i]));
 
-  isFull = (matrix) => matrix.map(line => line.every(value => value !== 0)).every(value => value);
-
   render() {
     const {
       playerName1,
@@ -164,39 +172,27 @@ class Home extends Component {
       color: playerTurn === 1 ? "blue":"green"
     };
 
+    const contentTransform = `rotate(${this.state.degCount}deg)`;
+
     return (
       <div className={`Home ${player.color}`}>
-        <div className="modal">
-          <form className="content" onSubmit={this.onSubmitPlayerName}>
-            <h2>Jogador N1, digite seu nome:</h2>
-            <input name="player1" minLength="4" value={playerName1} onChange={updatePlayerName} required/>
-            <button type="submit">Continuar</button>
-          </form>
-        </div>
-        <div className="modal">
-          <form className="content" onSubmit={this.onSubmitPlayerName}>
-            <h2>Jogador N2, digite seu nome:</h2>
-            <input name="player2" minLength="4" value={playerName2} onChange={updatePlayerName} required/>
-            <button type="submit">Continuar</button>
-          </form>
-        </div>
+        <Modal title={"Jogador N1, digite seu nome:"} name={"player1"} playerName={playerName1} onChangePlayerName={updatePlayerName}/>
+        <Modal title={"Jogador N2, digite seu nome:"} name={"player2"} playerName={playerName2} onChangePlayerName={updatePlayerName}/>
         <Header result={this.state.result} playerName={player.name} playerColor={player.color}/>
         <Main>
           <div className="container">
             <div className="data-players">
-              <div>
-                <div className="player-name">{playerName1}</div>
-                <div className="player-victory">Vitorias: {playerVictory1}</div>
+              <div className="player1">
+                <div className="player-name">{playerName1} - {playerVictory1}</div>
               </div>
               <div className="game-count">
-                <div>Contador de jogos: {gameCount}</div>
+                <div>Jogo - {gameCount}</div>
               </div>
-              <div>
-                <div className="player-name">{playerName2}</div>
-                <div className="player-victory">Vitorias: {playerVictory2}</div>
+              <div className="player2">
+                <div className="player-name">{playerName2} - {playerVictory2}</div>
               </div>
             </div>
-            <div className="content">
+            <div className="content" style={{transform: contentTransform}}>
               <div className="winner-line">
               </div>
               <div className="matrix">
@@ -211,7 +207,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="restart">
-              <div onClick={this.resetGameInterface}>Recomeçar!</div>
+              <div onClick={(e) => this.resetGameInterface(player.color)}>Recomeçar!</div>
             </div>
           </div>
         </Main>

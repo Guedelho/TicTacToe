@@ -10,65 +10,36 @@ $red: #dc3545;
 .Home {
   @extend %transition;
   &.blue {
-    &.winner{
+    &.winner {
       background: $blue;
+      .player1,
+      .player2 {
+        color: #fff;
+      }
     }
     .matrix,
     .value {
       border-color: $blue;
     }
+    .player2 {
+      opacity: .5;
+    }
   }
   &.green {
-    &.winner{
+    &.winner {
       background: $green;
+      .player1,
+      .player2 {
+        color: #fff;
+      }
     }
     .matrix,
     .value {
       border-color: $green;
     }
-  }
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 9;
-  background:#fff;
-  &:first-child{
-    z-index: 10;
-  }
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    padding: 20px;
-    max-width: 400px;
-    text-align: center;
-    border: thin solid $black;
-    border-radius: 20px;
-    transform: translate(-50%, -50%);
-    background: #fff;
-  }
-  input {
-    display: block;
-    margin: 10px auto;
-    font-size: 16px;
-    border: thin solid $black;
-    border-radius: 10px;
-  }
-  button {
-    display: block;
-    margin: 0 auto;
-    font-size: 16px;
-    background: $black;
-    border: 0;
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 15px;
+    .player1 {
+      opacity: .5;
+    }
   }
 }
 
@@ -82,7 +53,7 @@ $red: #dc3545;
     position: relative;
     width: 100%;
     max-width: 452px;
-    margin: auto;
+    margin: 0 auto;
     background: #fff;
     @extend %transition;
   }
@@ -108,22 +79,20 @@ $red: #dc3545;
     color: $black;
     transform: translate(-50%, -50%);
   }
+  &.type1::before {
+    content: 'X';
+    color: $blue;
+  }
+  &.type2::before {
+    content: 'O';
+    color: $green;
+  }
   @media (min-width: 480px) {
     font-size: 130px;
   }
   @media (min-width: 768px) {
     font-size: 160px;
   }
-}
-
-.player1::before {
-  content: 'X';
-  color: $blue;
-}
-
-.player2::before {
-  content: 'O';
-  color: $green;
 }
 
 .winner-line {
@@ -135,42 +104,42 @@ $red: #dc3545;
   transform: translateX(-50%);
   background: $red;
   z-index: 1;
-  &.reverse{
+  &.reverse {
     display: block;
     transform: translateX(-50%) rotate(90deg);
     transform-origin: left;
     top: 3%;
-    &.index0{
+    &.index0 {
       left: 64%;
     }
-    &.index1{
+    &.index1 {
       left: 97%;
     }
-    &.index2{
+    &.index2 {
       left: 130%;
     }
   }
-  &.diagonal{
+  &.diagonal {
     display: block;
     top: 7%;
     width: 120%;
     transform-origin: left;
-    &.index0{
+    &.index0 {
       transform: translateX(-35%) rotate(45deg);
     }
-    &.index1{
+    &.index1 {
       transform: translateX(35%) rotate(135deg);
     }
   }
-  &.normal{
+  &.normal {
     display: block;
-    &.index0{
+    &.index0 {
       top: 17%;
     }
-    &.index1{
+    &.index1 {
       top: 50%;
     }
-    &.index2{
+    &.index2 {
       top: 82%;
     }
   }
@@ -181,15 +150,25 @@ $red: #dc3545;
   width: 100%;
   text-align: center;
   flex-wrap: wrap;
+  align-items: baseline;
   > div {
-    margin: 10px auto;
+    font-size: 26px;
+    margin: 10px auto 0;
     width: 50%;
     @media (min-width: 480px) {
       width: 33.3333333%;
+      margin: 40px auto 0;
     }
   }
-  .game-count{
+  .player1 {
+    color: $blue;
+  }
+  .player2 {
+    color: $green;
+  }
+  .game-count {
     order: 1;
+    font-size: 14px;
     @media (min-width: 480px) {
       order: 0;
     }
@@ -198,8 +177,19 @@ $red: #dc3545;
 
 .restart {
   width: 100%;
-  margin: 20px auto;
+  margin: 0 auto;
   text-align: center;
+  @media (min-width: 480px) {
+    margin: 20px auto;
+  }
+  div {
+    display: inline-block;
+    padding: 5px 15px;
+    background: $red;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+  }
 }
 
 .warning {
@@ -207,19 +197,19 @@ $red: #dc3545;
 }
 
 @keyframes warning-animation {
-  0%{
+  0% {
     transform: translateX(0);
   }
-  25%{
+  25% {
     transform: translateX(-10%);
   }
-  50%{
+  50% {
     transform: translateX(0%);
   }
-  75%{
+  75% {
     transform: translateX(10%);
   }
-  100%{
+  100% {
     transform: translateX(0);
   }
 }

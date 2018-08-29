@@ -10,6 +10,9 @@
     color: #28a745; }
   .Header.white h1 {
     color: #fff; }
-
-h1 {
-  text-align: center; }
+  .Header h1 {
+    text-align: center;
+    margin: 0; }
+    @media (min-width: 480px) {
+      .Header h1 {
+        margin: 20px; } }

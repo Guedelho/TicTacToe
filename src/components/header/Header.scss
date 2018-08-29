@@ -24,8 +24,11 @@ $red: #dc3545;
       color: #fff;
     }
   }
-}
-
-h1 {
-  text-align: center;
+  h1 {
+    text-align: center;
+    margin: 0;
+    @media (min-width: 480px) {
+      margin: 20px;
+    }
+  }
 }

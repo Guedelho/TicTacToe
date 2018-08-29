@@ -3,55 +3,29 @@
 
 .Home.blue.winner {
   background: #007bff; }
+  .Home.blue.winner .player1,
+  .Home.blue.winner .player2 {
+    color: #fff; }
 
 .Home.blue .matrix,
 .Home.blue .value {
   border-color: #007bff; }
 
+.Home.blue .player2 {
+  opacity: .5; }
+
 .Home.green.winner {
   background: #28a745; }
+  .Home.green.winner .player1,
+  .Home.green.winner .player2 {
+    color: #fff; }
 
 .Home.green .matrix,
 .Home.green .value {
   border-color: #28a745; }
 
-.modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 9;
-  background: #fff; }
-  .modal:first-child {
-    z-index: 10; }
-  .modal .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    padding: 20px;
-    max-width: 400px;
-    text-align: center;
-    border: thin solid #343a40;
-    border-radius: 20px;
-    transform: translate(-50%, -50%);
-    background: #fff; }
-  .modal input {
-    display: block;
-    margin: 10px auto;
-    font-size: 16px;
-    border: thin solid #343a40;
-    border-radius: 10px; }
-  .modal button {
-    display: block;
-    margin: 0 auto;
-    font-size: 16px;
-    background: #343a40;
-    border: 0;
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 15px; }
+.Home.green .player1 {
+  opacity: .5; }
 
 .container {
   display: flex;
@@ -63,7 +37,7 @@
     position: relative;
     width: 100%;
     max-width: 452px;
-    margin: auto;
+    margin: 0 auto;
     background: #fff; }
 
 .matrix {
@@ -84,20 +58,18 @@
     left: 50%;
     color: #343a40;
     transform: translate(-50%, -50%); }
+  .value.type1::before {
+    content: 'X';
+    color: #007bff; }
+  .value.type2::before {
+    content: 'O';
+    color: #28a745; }
   @media (min-width: 480px) {
     .value {
       font-size: 130px; } }
   @media (min-width: 768px) {
     .value {
       font-size: 160px; } }
-
-.player1::before {
-  content: 'X';
-  color: #007bff; }
-
-.player2::before {
-  content: 'O';
-  color: #28a745; }
 
 .winner-line {
   position: absolute;
@@ -141,23 +113,41 @@
   display: flex;
   width: 100%;
   text-align: center;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  align-items: baseline; }
   .data-players > div {
-    margin: 10px auto;
+    font-size: 26px;
+    margin: 10px auto 0;
     width: 50%; }
     @media (min-width: 480px) {
       .data-players > div {
-        width: 33.3333333%; } }
+        width: 33.3333333%;
+        margin: 40px auto 0; } }
+  .data-players .player1 {
+    color: #007bff; }
+  .data-players .player2 {
+    color: #28a745; }
   .data-players .game-count {
-    order: 1; }
+    order: 1;
+    font-size: 14px; }
     @media (min-width: 480px) {
       .data-players .game-count {
         order: 0; } }
 
 .restart {
   width: 100%;
-  margin: 20px auto;
+  margin: 0 auto;
   text-align: center; }
+  @media (min-width: 480px) {
+    .restart {
+      margin: 20px auto; } }
+  .restart div {
+    display: inline-block;
+    padding: 5px 15px;
+    background: #dc3545;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer; }
 
 .warning {
   animation: warning-animation .2s ease-out; }
