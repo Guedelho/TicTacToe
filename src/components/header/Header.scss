@@ -1,7 +1,4 @@
-$black: #343a40;
-$green: #28a745;
-$blue: #007bff;
-$red: #dc3545;
+@import '../../assets/style.scss';
 
 .Header {
   position: fixed;
@@ -9,6 +6,7 @@ $red: #dc3545;
   left: 0;
   right: 0;
   height: auto;
+  transition: all 0.6s ease-in-out 0s;
   &.blue {
     h1{
       color: $blue;
@@ -21,7 +19,7 @@ $red: #dc3545;
   }
   &.white {
     h1{
-      color: #fff;
+      color: $white;
     }
   }
   h1 {

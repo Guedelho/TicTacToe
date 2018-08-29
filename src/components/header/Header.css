@@ -1,9 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif; }
+
+* {
+  box-sizing: border-box; }
+  *:focus {
+    outline: none; }
+
+.hide {
+  display: none; }
+
 .Header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: auto; }
+  height: auto;
+  transition: all 0.6s ease-in-out 0s; }
   .Header.blue h1 {
     color: #007bff; }
   .Header.green h1 {

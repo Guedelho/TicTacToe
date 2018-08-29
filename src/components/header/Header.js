@@ -11,7 +11,7 @@ const Header = ({result, playerName, playerColor}) => (
         <h1>O jogo empagou!</h1>
       )
     ):(
-      <h1>{playerName} é a sua vez!</h1>
+      <h1>{playerName}, é a sua vez!</h1>
     )}
   </header>
 );

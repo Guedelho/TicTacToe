@@ -1,7 +1,4 @@
-$black: #343a40;
-$green: #28a745;
-$blue: #007bff;
-$red: #dc3545;
+@import '../../assets/style.scss';
 
 .Modal {
   position: fixed;
@@ -10,9 +7,39 @@ $red: #dc3545;
   bottom: 0;
   left: 0;
   z-index: 9;
-  background:#fff;
+  background:$white;
   &:first-child{
     z-index: 10;
+  }
+  &.player1{
+    .content {
+      border-color: $blue;
+    }
+    input {
+      border-color: $blue;
+      color: $blue;
+    }
+    button {
+      background: $blue;
+    }
+    h3 {
+      color: $blue;
+    }
+  }
+  &.player2{
+    .content {
+      border-color: $green;
+    }
+    input {
+      border-color: $green;
+      color: $green;      
+    }
+    button {
+      background: $green;
+    }
+    h3 {
+      color: $green;
+    }
   }
   .content {
     position: absolute;
@@ -25,23 +52,23 @@ $red: #dc3545;
     border: thin solid $black;
     border-radius: 20px;
     transform: translate(-50%, -50%);
-    background: #fff;
+    background: $white;
   }
   input {
     display: block;
     margin: 10px auto;
-    padding: 5px;
+    padding: 5px 10px;
     font-size: 16px;
     border: thin solid $black;
     border-radius: 10px;
   }
   button {
     display: block;
-    margin: 0 auto;
+    margin: 20px auto 0;
     font-size: 16px;
     background: $black;
     border: 0;
-    color: #fff;
+    color: $white;
     padding: 5px 15px;
     border-radius: 15px;
   }

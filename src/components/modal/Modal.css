@@ -1,3 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif; }
+
+* {
+  box-sizing: border-box; }
+  *:focus {
+    outline: none; }
+
+.hide {
+  display: none; }
+
 .Modal {
   position: fixed;
   top: 0;
@@ -8,6 +21,24 @@
   background: #fff; }
   .Modal:first-child {
     z-index: 10; }
+  .Modal.player1 .content {
+    border-color: #007bff; }
+  .Modal.player1 input {
+    border-color: #007bff;
+    color: #007bff; }
+  .Modal.player1 button {
+    background: #007bff; }
+  .Modal.player1 h3 {
+    color: #007bff; }
+  .Modal.player2 .content {
+    border-color: #28a745; }
+  .Modal.player2 input {
+    border-color: #28a745;
+    color: #28a745; }
+  .Modal.player2 button {
+    background: #28a745; }
+  .Modal.player2 h3 {
+    color: #28a745; }
   .Modal .content {
     position: absolute;
     top: 50%;
@@ -23,13 +54,13 @@
   .Modal input {
     display: block;
     margin: 10px auto;
-    padding: 5px;
+    padding: 5px 10px;
     font-size: 16px;
     border: thin solid #343a40;
     border-radius: 10px; }
   .Modal button {
     display: block;
-    margin: 0 auto;
+    margin: 20px auto 0;
     font-size: 16px;
     background: #343a40;
     border: 0;

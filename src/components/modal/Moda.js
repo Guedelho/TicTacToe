@@ -8,7 +8,7 @@ const onSubmitPlayerName = (e) => {
 };
 
 const Modal = ({title, name, playerName, onChangePlayerName}) => (
-  <div className="Modal">
+  <div className={`Modal ${name}`}>
     <form className="content" onSubmit={onSubmitPlayerName}>
       <h3>{title}</h3>
       <input name={name} minLength="2" maxLength="8" value={playerName} onChange={onChangePlayerName} required/>

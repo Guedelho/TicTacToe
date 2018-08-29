@@ -182,13 +182,13 @@ class Home extends Component {
         <Main>
           <div className="container">
             <div className="data-players">
-              <div className="player1">
+              <div className="data-player1">
                 <div className="player-name">{playerName1} - {playerVictory1}</div>
               </div>
               <div className="game-count">
                 <div>Jogo - {gameCount}</div>
               </div>
-              <div className="player2">
+              <div className="data-player2">
                 <div className="player-name">{playerName2} - {playerVictory2}</div>
               </div>
             </div>

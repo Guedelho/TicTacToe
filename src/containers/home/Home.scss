@@ -1,43 +1,36 @@
-$black: #343a40;
-$green: #28a745;
-$blue: #007bff;
-$red: #dc3545;
-
-%transition {
-  transition: all 0.6s cubic-bezier(0.572, 0, 0.397, 1) 0s;
-}
+@import '../../assets/style.scss';
 
 .Home {
   @extend %transition;
   &.blue {
     &.winner {
       background: $blue;
-      .player1,
-      .player2 {
-        color: #fff;
+      .data-player1,
+      .data-player2 {
+        color: $white;
       }
     }
     .matrix,
     .value {
       border-color: $blue;
     }
-    .player2 {
+    .data-player2 {
       opacity: .5;
     }
   }
   &.green {
     &.winner {
       background: $green;
-      .player1,
-      .player2 {
-        color: #fff;
+      .data-player1,
+      .data-player2 {
+        color: $white;
       }
     }
     .matrix,
     .value {
       border-color: $green;
     }
-    .player1 {
+    .data-player1 {
       opacity: .5;
     }
   }
@@ -54,7 +47,7 @@ $red: #dc3545;
     width: 100%;
     max-width: 452px;
     margin: 0 auto;
-    background: #fff;
+    background: $white;
     @extend %transition;
   }
 }
@@ -160,10 +153,10 @@ $red: #dc3545;
       margin: 40px auto 0;
     }
   }
-  .player1 {
+  .data-player1 {
     color: $blue;
   }
-  .player2 {
+  .data-player2 {
     color: $green;
   }
   .game-count {
@@ -186,7 +179,7 @@ $red: #dc3545;
     display: inline-block;
     padding: 5px 15px;
     background: $red;
-    color: #fff;
+    color: $white;
     border-radius: 20px;
     cursor: pointer;
   }
