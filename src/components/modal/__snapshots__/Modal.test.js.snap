@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Modal
+    name="string"
+    onChangePlayerName={[Function]}
+    playerName="string"
+    title="string"
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <form
+        className="content"
+        onSubmit={[Function]}
+>
+        <h3>
+                string
+        </h3>
+        <input
+                maxLength="8"
+                minLength="2"
+                name="string"
+                onChange={[Function]}
+                required={true}
+                value="string"
+        />
+        <button
+                type="submit"
+        >
+                Continuar
+        </button>
+</form>,
+      "className": "Modal string",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h3>
+            string
+</h3>,
+          <input
+            maxLength="8"
+            minLength="2"
+            name="string"
+            onChange={[Function]}
+            required={true}
+            value="string"
+/>,
+          <button
+            type="submit"
+>
+            Continuar
+</button>,
+        ],
+        "className": "content",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "string",
+          },
+          "ref": null,
+          "rendered": "string",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "maxLength": "8",
+            "minLength": "2",
+            "name": "string",
+            "onChange": [Function],
+            "required": true,
+            "value": "string",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Continuar",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "Continuar",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <form
+          className="content"
+          onSubmit={[Function]}
+>
+          <h3>
+                    string
+          </h3>
+          <input
+                    maxLength="8"
+                    minLength="2"
+                    name="string"
+                    onChange={[Function]}
+                    required={true}
+                    value="string"
+          />
+          <button
+                    type="submit"
+          >
+                    Continuar
+          </button>
+</form>,
+        "className": "Modal string",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h3>
+              string
+</h3>,
+            <input
+              maxLength="8"
+              minLength="2"
+              name="string"
+              onChange={[Function]}
+              required={true}
+              value="string"
+/>,
+            <button
+              type="submit"
+>
+              Continuar
+</button>,
+          ],
+          "className": "content",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "string",
+            },
+            "ref": null,
+            "rendered": "string",
+            "type": "h3",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "maxLength": "8",
+              "minLength": "2",
+              "name": "string",
+              "onChange": [Function],
+              "required": true,
+              "value": "string",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Continuar",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "Continuar",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;

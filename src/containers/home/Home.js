@@ -5,6 +5,7 @@ import './Home.css';
 
 import Header from '../../components/header/Header';
 import Main from '../../components/main/Main';
+import Modal from "../../components/modal/Modal";
 
 import {
   updatePlayerName,
@@ -13,7 +14,35 @@ import {
   updateGameCount,
   updateMatrix
 } from "../../modules/tictactoe";
-import Modal from "../../components/modal/Moda";
+
+export const verifyLine = (matrix, isReverse, isDiagonal) => {
+  for (let i = 0; i < matrix.length; i++) {
+    if (matrix[i].every((value) => value === 1) || matrix[i].every((value) => value === 2)) {
+      return {
+        winner: matrix[i][0],
+        lineIndex: i,
+        isReverse: isReverse,
+        isDiagonal: isDiagonal
+      };
+    }
+  }
+
+  return false;
+};
+
+export const diagonalMatrix = (matrix) => {
+  let diagonalX = [];
+  let diagonalY = [];
+
+  for (let i = 0; i < matrix.length; i++) {
+    diagonalX.push(matrix[i][i]);
+    diagonalY.push(matrix[i][matrix.length - i - 1]);
+  }
+
+  return [diagonalX, diagonalY];
+};
+
+export const reverseMatrix = (matrix) => matrix.map((line, i) => line.map((value, j) => matrix[j][i]));
 
 class Home extends Component {
   constructor(){
@@ -54,7 +83,7 @@ class Home extends Component {
   };
 
   gameController = (matrix) => {
-    const result = this.verifyLine(matrix, false, false) || this.verifyLine(this.reverseMatrix(matrix), true, false) || this.verifyLine(this.diagonalMatrix(matrix), false, true);
+    const result = verifyLine(matrix, false, false) || verifyLine(reverseMatrix(matrix), true, false) || verifyLine(diagonalMatrix(matrix), false, true);
 
     if (result) {
       this.handlerResult(result);
@@ -114,33 +143,6 @@ class Home extends Component {
 
     this.setState({result: 0, movesCount: 0, degCount: 0});
   };
-
-  verifyLine = (matrix, isReverse, isDiagonal) => {
-    for (let i = 0; i < matrix.length; i++) {
-      if (matrix[i].every((value) => value === 1) || matrix[i].every((value) => value === 2)) {
-        return {
-          winner: matrix[i][0],
-          lineIndex: i,
-          isReverse: isReverse,
-          isDiagonal: isDiagonal
-        };
-      }
-    }
-  };
-
-  diagonalMatrix = (matrix) => {
-    let diagonalX = [];
-    let diagonalY = [];
-
-    for (let i = 0; i < matrix.length; i++) {
-      diagonalX.push(matrix[i][i]);
-      diagonalY.push(matrix[i][matrix.length - i - 1]);
-    }
-
-    return [diagonalX, diagonalY];
-  };
-
-  reverseMatrix = (matrix) => matrix.map((line, i) => line.map((value, j) => matrix[j][i]));
 
   render() {
     const {
