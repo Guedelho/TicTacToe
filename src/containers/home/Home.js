@@ -31,24 +31,19 @@ class Home extends Component {
     let matrix = this.props.matrix;
 
     if (!matrix[i][j] && !this.state.result) {
-      let movesCount = this.state.movesCount;
-      let playerTurn = this.props.playerTurn;
+      this.controlMatrixAnimation(e, this.props.playerTurn);
 
-      this.controlMatrixAnimation(e, playerTurn);
-
-      matrix[i][j] = playerTurn;
+      matrix[i][j] = this.props.playerTurn;
       this.props.updateMatrix(matrix);
 
-      movesCount++;
-      this.setState({movesCount});
+      this.setState({movesCount: this.state.movesCount + 1});
 
       if(this.gameController(matrix)) return;
 
-      playerTurn = playerTurn === 1 ? 2 : 1;
-      this.props.updatePlayerTurn(playerTurn);
+      this.props.updatePlayerTurn(this.props.playerTurn === 1 ? 2 : 1);
 
     } else if(!this.state.result){
-      let matrix = document.querySelector(".matrix");
+      const matrix = document.querySelector(".matrix");
 
       matrix.classList.add("warning");
 
@@ -59,33 +54,29 @@ class Home extends Component {
   };
 
   gameController = (matrix) => {
-    let result = this.verifyLine(matrix, false, false) || this.verifyLine(this.reverseMatrix(matrix), true, false) || this.verifyLine(this.diagonalMatrix(matrix), false, true);
+    const result = this.verifyLine(matrix, false, false) || this.verifyLine(this.reverseMatrix(matrix), true, false) || this.verifyLine(this.diagonalMatrix(matrix), false, true);
 
     if (result) {
-      this.handlerWinner(result);
-    } else if (this.state.movesCount === 8) {
+      this.handlerResult(result);
+    } else if (this.state.movesCount === 9) {
       this.setState({result: 2});
     }
 
-    if(result || this.state.movesCount === 8){
+    if(result || this.state.movesCount === 9){
       this.handleEndGame();
       return true;
     }
     return false;
   };
 
-  handlerWinner = (result) => {
-    let winnerLine = document.querySelector(".winner-line");
-    let home = document.querySelector(".Home");
+  handlerResult = (result) => {
+    const winnerLine = document.querySelector(".winner-line");
+    const home = document.querySelector(".Home");
 
     if (result.winner === 1) {
-      let playerVictory1 = this.props.playerVictory1;
-      playerVictory1++;
-      this.props.updatePlayerVictory("player1", playerVictory1);
+      this.props.updatePlayerVictory("player1", this.props.playerVictory1 + 1);
     } else {
-      let playerVictory2 = this.props.playerVictory2;
-      playerVictory2++;
-      this.props.updatePlayerVictory("player2", playerVictory2);
+      this.props.updatePlayerVictory("player2", this.props.playerVictory2 + 1);
     }
 
     if (result.isReverse) {
@@ -102,24 +93,20 @@ class Home extends Component {
   };
 
   handleEndGame = () => {
-    let gameCount = this.props.gameCount;
-    gameCount++;
-    this.props.updateGameCount(gameCount);
+    this.props.updateGameCount(this.props.gameCount + 1);
     this.props.updateMatrix(null);
   };
 
   controlMatrixAnimation = (e, playerTurn) => {
-    let degCount = this.state.degCount;
-
     e.target.classList.add("type" + playerTurn);
 
-    this.setState({degCount: degCount + 90});
+    this.setState({degCount: this.state.degCount + 90});
   };
 
   resetGameInterface = (playerColor) => {
-    let winnerLine = document.querySelector(".winner-line");
-    let home = document.querySelector(".Home");
-    let value = [...document.querySelectorAll(".value")];
+    const winnerLine = document.querySelector(".winner-line");
+    const home = document.querySelector(".Home");
+    const value = [...document.querySelectorAll(".value")];
 
     winnerLine.className = "winner-line";
     home.className = "Home " + playerColor;
